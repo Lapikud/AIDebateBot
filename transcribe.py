@@ -12,7 +12,7 @@ init(autoreset=True)
 MODEL_SIZE = "Systran/faster-whisper-medium.en"  # tiny, base, small, medium, large
 SAMPLERATE = 16000  # sample rate for recording
 CHANNELS = 1  # mono audio
-UPDATE_INTERVAL = 5  # seconds between transcript updates
+UPDATE_INTERVAL = 10  # seconds between transcript updates
 # ---------------------------------------- #
 
 # Logging helper
@@ -67,4 +67,6 @@ except KeyboardInterrupt:
 
 log("\nFinal transcript:")
 print(full_transcript)
+# with open("full_debate", "a") as f:
+#     f.write(full_transcript)
 

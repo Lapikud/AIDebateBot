@@ -7,7 +7,8 @@ from faster_whisper import WhisperModel
 import os
 from colorama import init, Fore, Style
 from controller import send_text_to_ai
-from texttospeech import send_text_to_tts
+import texttospeech
+import playsound
 
 # Initialize colorama
 init(autoreset=True)
@@ -43,10 +44,10 @@ audio_queue = queue.Queue()
 current_full_transcript = ""
 log("Audio queue ready.")
 
-log("Initializing speech files...")
+log("Initializing speech and prompt files...")
 # open("humanity_speeches", "a").close()
 # open("ai_speeches", "a").close()
-open("speeches", "a").close()
+open("speeches", "w").close()
 open("prompt", "a").close()
 log("Speech files made.")
 
@@ -95,6 +96,7 @@ def write_to_file(file_name: str, text: str, mode: str):
 
 
 while True:
+    current_full_transcript = ""
     # Ask user before starting
     input(Fore.YELLOW + "\nPress Enter to start recording audio...")
     start_time = time.time()
@@ -156,7 +158,9 @@ while True:
         # Send to text-to-speech
         # print(Fore.YELLOW + "\nPress ENTER so AI could give their speech...")
         # input()
-        # send_text_to_tts(ai_reply)
+        # texttospeech.send_text_to_kokoro_tts(ai_reply)
+        # texttospeech.send_text_to_openai_tts(ai_reply)
+        # playsound(filename)
 
         user_input = input(Fore.YELLOW + "\nPress ENTER for next round"
                                          "\nq to quit")

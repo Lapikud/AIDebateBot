@@ -1,6 +1,6 @@
 from openai import OpenAI
 import os
-from colorama import init, Fore, Style
+from colorama import Fore
 
 
 def send_text_to_ai(system_prompt: str, full_transcript: str) -> str:

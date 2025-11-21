@@ -3,20 +3,42 @@ import base64
 import soundfile as sf
 import sounddevice as sd
 from colorama import Fore
+import time
 
 
-def send_text_to_tts(ai_reply: str):
+def send_text_to_tts(text: str):
     print(Fore.GREEN + "\nSending AI reply to Kokoro TTS...")
 
     try:
         tts_payload = {
-            "text": ai_reply,
-            "voice": "af_heart",      # pick your Kokoro voice
+            "text": text,
+            "voice": "af_heart",  # pick your Kokoro voice
             "format": "wav",
             "speed": 1.0
         }
+        tts_payload = {
+            "model": "kokoro",
+            "input": "string",
+            "voice": "af_heart",
+            "response_format": "mp3",
+            "download_format": "mp3",
+            "speed": 1,
+            "stream": True,
+            "return_download_link": False,
+            "lang_code": "string",
+            "volume_multiplier": 1,
+            "normalization_options": {
+                "normalize": True,
+                "unit_normalization": False,
+                "url_normalization": True,
+                "email_normalization": True,
+                "optional_pluralization_normalization": True,
+                "phone_normalization": True,
+                "replace_remaining_symbols": True
+            }
+        }
 
-        r = requests.post("http://localhost:8880/tts", json=tts_payload, timeout=60)
+        r = requests.post("http://localhost:8880/v1/audio/speech", json=tts_payload, timeout=60)
 
         if r.status_code != 200:
             print(Fore.RED + f"Kokoro error: {r.text}")
@@ -40,6 +62,23 @@ def send_text_to_tts(ai_reply: str):
     except Exception as e:
         print(Fore.RED + f"Error during Kokoro TTS: {e}")
 
+
 if __name__ == '__main__':
+    # while True:
+    #     tts_payload = {
+    #         "text": "hello",
+    #         "voice": "af_heart",  # pick your Kokoro voice
+    #         "format": "wav",
+    #         "speed": 1.0
+    #     }
+    #     r = requests.get("http://localhost:8880/health", timeout=60)
+    #
+    #     code = r.status_code
+    #     if code != 200:
+    #         print(Fore.RED + f"Kokoro error, status code: {code}: {r.text}")
+    #         time.sleep(5)
+    #         continue
+    #     print(Fore.GREEN + f"Kokoro success: {r.text}")
+    #     break
     text = "Hello, my name is kokoro. What is your name?"
     send_text_to_tts(text)

@@ -7,8 +7,6 @@ from faster_whisper import WhisperModel
 import os
 from colorama import init, Fore, Style
 from controller import send_text_to_ai
-import texttospeech
-import playsound
 
 # Initialize colorama
 init(autoreset=True)

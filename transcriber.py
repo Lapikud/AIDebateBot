@@ -5,7 +5,7 @@ import threading
 import time
 from faster_whisper import WhisperModel
 import os
-from colorama import init, Fore, Style
+from colorama import init, Fore
 from controller import send_text_to_ai
 
 # Initialize colorama
@@ -18,7 +18,7 @@ SAMPLERATE = 16000  # sample rate for recording
 CHANNELS = 1  # mono audio
 OUTPUT_DIR = "audio_chunks"  # where temporary chunks will be stored
 MAX_CHUNKS = 2
-# MAX_CHUNKS = 18
+# MAX_CHUNKS = 30
 HUMANITY_SPEECH_COUNT = 1
 AI_SPEECH_COUNT = 1
 
